@@ -1,4 +1,5 @@
-'''Regenwormen''' is een [[dobbelspel]] voor 2 tot 7 spelers en is uitgegeven door [[999 Games]]. De spelers zijn hongerige kippen die hun uiterste best doen zo veel mogelijk regenwormen te verschalken. Wie te gulzig is ondervindt hier echter nadeel van. Regenwormen is een spel voor bijna alle leeftijden.
+<h1>Lumbricidae</h1> 
+<p>A dicegame for 2 to 7 players and is published by <b>999 Games</b>. The players are hungry chicken who will do their utmost to eat as many lumbricidae as they can. The one who is greedy will experience the disadvantage. Lumbricidae is a game for almost all ages.</p>
 
 == Doel van het spel ==
 Het doel van het spel is om met behulp van de dobbelstenen zo veel mogelijk regenwormen te verzamelen.
