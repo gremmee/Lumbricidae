@@ -7,5 +7,5 @@ public interface IArtificialIntelligence {
 
 	public boolean isBusted(RollList aRollList, RollList aSaveList);
 
-	public boolean playOn(RollList aRollList, RollList aSaveList, StoneList aStoneList);
+	public boolean playOn(RollList aRollList, RollList aSaveList, TileList aTileList);
 }

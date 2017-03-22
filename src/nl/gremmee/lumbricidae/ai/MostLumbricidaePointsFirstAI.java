@@ -47,7 +47,7 @@ public class MostLumbricidaePointsFirstAI implements IArtificialIntelligence {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean playOn(RollList aRollList, RollList aSaveList, StoneList aStoneList) {
+	public boolean playOn(RollList aRollList, RollList aSaveList, TileList aTileList) {
 		if (aRollList.size() < 2) {
 
 			return false;

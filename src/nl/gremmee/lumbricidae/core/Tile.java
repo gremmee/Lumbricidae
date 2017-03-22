@@ -1,12 +1,12 @@
 package nl.gremmee.lumbricidae.core;
 
-public class Stone {
+public class Tile {
 
 	private int lumbricidae;
 	private int number;
 	private boolean enabled;
 
-	public Stone(int aLumbricidae, int aNumber) {
+	public Tile(int aLumbricidae, int aNumber) {
 		this.lumbricidae = aLumbricidae;
 		this.number = aNumber;
 		this.enabled = true;
@@ -30,6 +30,6 @@ public class Stone {
 
 	@Override
 	public String toString() {
-		return "Stone " + this.number + " " + this.enabled;
+		return "Tile " + this.number + " " + this.enabled;
 	}
 }
