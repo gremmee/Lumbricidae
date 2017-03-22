@@ -15,7 +15,7 @@ public class Initialize {
 	private static Initialize instance;
 	private ArrayList<Player> playerList;
 	private DiceList diceList;
-	private StoneList stoneList;
+	private TileList tileList;
 
 	private Initialize() {
 	}
@@ -66,18 +66,18 @@ public class Initialize {
 		return playerList;
 	}
 
-	public StoneList initializeStone() {
-		System.out.println("Initializing Stones");
-		stoneList = new StoneList();
+	public TileList initializeTiles() {
+		System.out.println("Initializing Tiles");
+		tileList = new TileList();
 		for (int i = 21; i <= 36; i++) {
-			Stone stone = new Stone((((i - 1) / 4) - 4), i);
-			System.out.print(
-					"Creating Stone " + stone.getNumber() + " with lumbricidae " + stone.getLumbricidae() + "...");
-			stoneList.add(stone);
+			Tile tile = new Tile((((i - 1) / 4) - 4), i);
+			System.out
+					.print("Creating Tile " + tile.getNumber() + " with lumbricidae " + tile.getLumbricidae() + "...");
+			tileList.add(tile);
 			System.out.println("[OK]");
-			repaint("Creating Stone " + stone.getNumber() + "...");
+			repaint("Creating Tile " + tile.getNumber() + "...");
 		}
-		return stoneList;
+		return tileList;
 	}
 
 	private void repaint(String aMessage) {

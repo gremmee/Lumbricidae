@@ -14,8 +14,8 @@ public class Player {
 	private boolean winner;
 	private String name;
 	private int number;
-	private StoneList stoneList;
-	private Stone putBack;
+	private TileList tileList;
+	private Tile putBack;
 	private DiceList diceList;
 	private DiceList masterDiceList;
 	private RollList rollList;
@@ -28,7 +28,7 @@ public class Player {
 		this.name = aName;
 		this.number = aNumber;
 		this.intelligence = aArtificialIntelligence;
-		this.stoneList = new StoneList();
+		this.tileList = new TileList();
 		this.diceList = new DiceList();
 		this.masterDiceList = new DiceList();
 		this.diceList.addAll(aDiceList);
@@ -42,47 +42,47 @@ public class Player {
 		return intelligence;
 	}
 
-	public Stone getPuttBack() {
-		Stone stone = this.putBack;
+	public Tile getPuttBack() {
+		Tile tile = this.putBack;
 		this.putBack = null;
-		return stone;
+		return tile;
 	}
 
 	public int getTotalLumbricidae() {
 		int lumbricidae = 0;
-		for (Stone stone : this.getStoneList()) {
-			lumbricidae += stone.getLumbricidae();
+		for (Tile tile : this.getTileList()) {
+			lumbricidae += tile.getLumbricidae();
 		}
 		return lumbricidae;
 	}
 
-	public void putStoneInList(Stone aStone) {
-		this.stoneList.add(aStone);
+	public void putTileInList(Tile aTile) {
+		this.tileList.add(aTile);
 	}
 
-	public Stone removeTopStoneFromList() {
-		if (!this.stoneList.isEmpty()) {
-			this.putBack = this.stoneList.remove(this.stoneList.size() - 1);
+	public Tile removeTopTileFromList() {
+		if (!this.tileList.isEmpty()) {
+			this.putBack = this.tileList.remove(this.tileList.size() - 1);
 			return this.putBack;
 		}
 		return null;
 	}
 
-	public StoneList getStoneList() {
-		return this.stoneList;
+	public TileList getTileList() {
+		return this.tileList;
 	}
 
-	public boolean hasStones() {
-		return !this.stoneList.isEmpty();
+	public boolean hasTiles() {
+		return !this.tileList.isEmpty();
 	}
 
-	public int getStoneListSize() {
-		return this.stoneList.size();
+	public int getTileListSize() {
+		return this.tileList.size();
 	}
 
-	public Stone getTopStone() {
-		if (!this.stoneList.isEmpty()) {
-			return this.stoneList.get(this.stoneList.size() - 1);
+	public Tile getTopTile() {
+		if (!this.tileList.isEmpty()) {
+			return this.tileList.get(this.tileList.size() - 1);
 		}
 		return null;
 	}
@@ -143,7 +143,7 @@ public class Player {
 				saveDice(result.intValue());
 				System.out.println("Player Savelist = " + saveList.toString());
 			}
-		} while (this.getIntelligence().playOn(rollList, saveList, Lumbricidae.getMasterStoneList())
+		} while (this.getIntelligence().playOn(rollList, saveList, Lumbricidae.getMasterTileList())
 				&& !this.getIntelligence().isBusted(rollList, saveList));
 		if (!this.getIntelligence().isBusted(rollList, saveList)) {
 			// Rules
@@ -171,11 +171,11 @@ public class Player {
 				System.out.println("Points after play " + points);
 			} else {
 				// busted
-				this.removeTopStoneFromList();
+				this.removeTopTileFromList();
 			}
 		} else {
 			// busted
-			this.removeTopStoneFromList();
+			this.removeTopTileFromList();
 		}
 		System.out.println("Player Rolllist = " + rollList.toString());
 		System.out.println("Player Savelist = " + saveList.toString());

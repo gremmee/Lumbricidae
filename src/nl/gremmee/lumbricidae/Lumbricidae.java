@@ -4,19 +4,19 @@ import java.util.List;
 
 import nl.gremmee.lumbricidae.core.DiceList;
 import nl.gremmee.lumbricidae.core.Player;
-import nl.gremmee.lumbricidae.core.Stone;
-import nl.gremmee.lumbricidae.core.StoneList;
+import nl.gremmee.lumbricidae.core.Tile;
+import nl.gremmee.lumbricidae.core.TileList;
 import nl.gremmee.lumbricidae.initialize.Initialize;
 import nl.gremmee.lumbricidae.rules.Rules;
 
 public final class Lumbricidae {
 	private static final int NUM_DICE = 8;
 	private static final int NUM_PLAYERS = 2;
-	private static final int NUM_STONES = 16;
+	private static final int NUM_TILES = 16;
 
 	private static DiceList diceList;
 	private static List<Player> playerList;
-	private static StoneList masterStoneList;
+	private static TileList masterTileList;
 	private static boolean done = false;
 
 	public static void main(String[] args) {
@@ -39,8 +39,8 @@ public final class Lumbricidae {
 		return playerList;
 	}
 
-	public static final StoneList getMasterStoneList() {
-		return masterStoneList;
+	public static final TileList getMasterTileList() {
+		return masterTileList;
 	}
 
 	public static final DiceList getDiceList() {
@@ -57,10 +57,10 @@ public final class Lumbricidae {
 		Initialize.getInstance();
 		int max = Rules.getInstance().getRules().size();
 		max += NUM_DICE;
-		max += NUM_STONES;
+		max += NUM_TILES;
 		max += NUM_PLAYERS;
 		diceList = Initialize.getInstance().initializeDice(NUM_DICE);
-		masterStoneList = Initialize.getInstance().initializeStone();
+		masterTileList = Initialize.getInstance().initializeTiles();
 		playerList = Initialize.getInstance().initializePlayers(NUM_PLAYERS);
 	}
 
@@ -73,46 +73,46 @@ public final class Lumbricidae {
 			for (Player player : playerList) {
 				player.setactive(true);
 				System.out.println(player.getName() + " is playing");
-				System.out.println("PlayerStoneList = " + player.getStoneList().toString());
+				System.out.println("PlayerTileList = " + player.getTileList().toString());
 				int points = player.play();
 				System.out.println("Points : " + points);
-				boolean stonecollected = false;
+				boolean tileCollected = false;
 				for (Player otherPlayer : playerList) {
 					if (!otherPlayer.equals(player)) {
-						if (otherPlayer.hasStones() && (otherPlayer.getTopStone().getNumber() == points)) {
-							Stone topStone = otherPlayer.removeTopStoneFromList();
-							player.putStoneInList(topStone);
-							stonecollected = true;
+						if (otherPlayer.hasTiles() && (otherPlayer.getTopTile().getNumber() == points)) {
+							Tile topTile = otherPlayer.removeTopTileFromList();
+							player.putTileInList(topTile);
+							tileCollected = true;
 							break;
 						}
 					}
 				}
-				if ((!stonecollected) && (points > masterStoneList.get(0).getNumber()) && !player.getBusted()) {
+				if ((!tileCollected) && (points > masterTileList.get(0).getNumber()) && !player.getBusted()) {
 					int index = -1;
 					do {
 						if (index != -1) {
-							masterStoneList.putStoneOnPlayer(index, player);
-							if (masterStoneList.isEmpty()) {
+							masterTileList.putTileOnPlayer(index, player);
+							if (masterTileList.isEmpty()) {
 								break GAME;
 							}
 							break;
 						}
 						while ((index == -1) && (points > 20)) {
-							index = masterStoneList.getIndex(points--);
+							index = masterTileList.getIndex(points--);
 						}
 					} while (index != -1);
-				} else if (!stonecollected) {
+				} else if (!tileCollected) {
 					// busted
-					Stone putBack = player.getPuttBack();
+					Tile putBack = player.getPuttBack();
 					if (putBack != null) {
-						masterStoneList.putBackStone(putBack);
+						masterTileList.putBackTile(putBack);
 					}
 				}
-				System.out.println("MasterStoneList = " + masterStoneList.toString());
-				System.out.println("PlayerStoneList = " + player.getStoneList().toString());
+				System.out.println("MasterTileList = " + masterTileList.toString());
+				System.out.println("PlayerTileList = " + player.getTileList().toString());
 				player.setactive(false);
 			}
-		} while (!masterStoneList.isEmpty());
+		} while (!masterTileList.isEmpty());
 		Lumbricidae.setDone();
 		System.out.println("Done...");
 		int max = 0;
@@ -121,7 +121,7 @@ public final class Lumbricidae {
 				max = player.getTotalLumbricidae();
 			}
 			System.out.println("Player " + player);
-			System.out.println("PlayerStoneList = " + player.getStoneList().toString());
+			System.out.println("PlayerTileList = " + player.getTileList().toString());
 			System.out.println("Lumbricidae " + player.getTotalLumbricidae());
 		}
 		for (Player player : playerList) {
