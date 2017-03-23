@@ -1,22 +1,22 @@
 package nl.gremmee.lumbricidae.rules;
 
 public abstract class BaseRule<T> implements IRule, Comparable<T> {
-	private int priority;
+    private int priority;
 
-	@Override
-	public int compareTo(T o) {
-		final int BEFORE = -1;
-		final int EQUAL = 0;
-		final int AFTER = 1;
+    @Override
+    public int compareTo(T o) {
+        final int BEFORE = -1;
+        final int EQUAL = 0;
+        final int AFTER = 1;
 
-		return AFTER;
-	}
+        return AFTER;
+    }
 
-	public int getPriority() {
-		return priority;
-	}
+    public int getPriority() {
+        return priority;
+    }
 
-	public void setPriority(int priority) {
-		this.priority = priority;
-	}
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
 }
