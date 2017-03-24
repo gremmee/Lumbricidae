@@ -2,9 +2,14 @@ package nl.gremmee.lumbricidae.ai;
 
 import nl.gremmee.lumbricidae.core.DieResult;
 import nl.gremmee.lumbricidae.core.RollList;
+import nl.gremmee.lumbricidae.core.Tile;
 import nl.gremmee.lumbricidae.core.TileList;
 
-public class MostLumbricidaePointsFirstAI extends BaseAI implements IArtificialIntelligence {
+/**
+ * Gets the first available Tile which can be taken after a roll. Continue to
+ * roll as long as this is possible (or until busted)
+ */
+public class FirstAvailableAI extends BaseAI implements IArtificialIntelligence {
     private boolean busted;
 
     /**
@@ -50,10 +55,31 @@ public class MostLumbricidaePointsFirstAI extends BaseAI implements IArtificialI
      */
     @Override
     public boolean playOn(RollList aRollList, RollList aSaveList, TileList aTileList) {
-        if (aRollList.size() < 2) {
-
+        if (aRollList.isEmpty()) {
             return false;
         }
-        return true;
+        boolean lumbricidae = false;
+        // must have a Lumbricidae
+        if (aSaveList.contains(new Long("6"))) {
+            lumbricidae = true;
+        }
+        int points = 0;
+        for (Long save : aSaveList) {
+            if (save.intValue() == 6) {
+                points += 5;
+            } else {
+                points += save.intValue();
+            }
+        }
+        boolean found = true;
+        if ((points > 20) && lumbricidae) {
+            for (Tile tile : aTileList) {
+                if (points >= tile.getNumber()) {
+                    found = false;
+                    break;
+                }
+            }
+        }
+        return found;
     }
 }

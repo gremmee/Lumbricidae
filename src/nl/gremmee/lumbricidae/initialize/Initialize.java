@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import nl.gremmee.lumbricidae.ai.AIs;
+import nl.gremmee.lumbricidae.ai.IArtificialIntelligence;
 import nl.gremmee.lumbricidae.ai.MostLumbricidaePointsFirstAI;
 import nl.gremmee.lumbricidae.core.DiceList;
 import nl.gremmee.lumbricidae.core.Die;
@@ -57,6 +59,19 @@ public class Initialize {
             System.out.print("Creating Rule " + rule.getClass().getSimpleName() + "...");
             System.out.println("[OK]");
             repaint("Creating Rule " + ++i);
+        }
+    }
+
+    public void initializeAIs() {
+        System.out.println("Initializing AIs");
+        Set<IArtificialIntelligence> ais = AIs.getInstance().getAIs();
+        Iterator<IArtificialIntelligence> iter = ais.iterator();
+        int i = 0;
+        while (iter.hasNext()) {
+            IArtificialIntelligence ai = iter.next();
+            System.out.print("Creating AI " + ai.getClass().getSimpleName() + "...");
+            System.out.println("[OK]");
+            repaint("Creating AI " + ++i);
         }
     }
 

@@ -2,6 +2,7 @@ package nl.gremmee.lumbricidae;
 
 import java.util.List;
 
+import nl.gremmee.lumbricidae.ai.AIs;
 import nl.gremmee.lumbricidae.core.DiceList;
 import nl.gremmee.lumbricidae.core.Player;
 import nl.gremmee.lumbricidae.core.Tile;
@@ -53,6 +54,7 @@ public final class Lumbricidae {
         max += NUM_DICE;
         max += NUM_TILES;
         max += NUM_PLAYERS;
+        max += AIs.getInstance().getAIs().size();
         diceList = Initialize.getInstance().initializeDice(NUM_DICE);
         masterTileList = Initialize.getInstance().initializeTiles();
         playerList = Initialize.getInstance().initializePlayers(NUM_PLAYERS);
