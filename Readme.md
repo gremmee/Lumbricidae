@@ -1,6 +1,6 @@
 <h1>Lumbricidae</h1> 
 <p>A dicegame for 2 to 7 players and is published by <b>999 Games</b>. The players are hungry chicken who will do their utmost to eat as many lumbricidae as they can. The one who is greedy will experience the disadvantage. Lumbricidae is a game for almost all ages.</p>
-
+http://www.999games.nl/regenwormen.html
 ![Splash](/src/nl/gremmee/lumbricidae/resources/splash.jpg "Splash")
 
 <h2>Object of the game</h2>
